@@ -122,7 +122,7 @@ public class ReadXMLFile
                     str = listOfFiles[i].getName().substring(5,7);
                     tempMonth = Integer.parseInt(str);
                     
-                    readingXML(temp.year[tempYear - temp.leastYear].months[tempMonth-1], listOfFiles[i].getName());
+                    readingXML(temp.year[tempYear - temp.leastYear].months[tempMonth-1], listOfFiles[i].getName(),directory);
                     
                     temp.year[tempYear - temp.leastYear].avTemp += temp.year[tempYear - temp.leastYear].
                                     months[tempMonth-1].avTemp;
@@ -264,8 +264,8 @@ public class ReadXMLFile
         
         
         convertToMinute(child.getChildText("date"), child.getChildText("time"), temp.days[indexY], indexX );
-        
-        temp.days[indexY].temperature[indexX] = Double.parseDouble(child.getChildText("temperature"));
+        if(child.getChildText("temperature") != null)
+            temp.days[indexY].temperature[indexX] = Double.parseDouble(child.getChildText("temperature"));
         temp.days[indexY].humidity[indexX] = Double.parseDouble(child.getChildText("humidity"));
         temp.days[indexY].barometer[indexX] = Double.parseDouble(child.getChildText("barometer") );
         temp.days[indexY].windspeed[indexX] = Double.parseDouble(child.getChildText("windspeed") );
@@ -304,7 +304,7 @@ public class ReadXMLFile
         }
     }
     
-    public static void readingXML(Month temp, String filename)
+    public static void readingXML(Month temp, String filename, String directory)
     {
         int indexX = 0;
         int indexY = 0;
@@ -321,7 +321,7 @@ public class ReadXMLFile
         SAXBuilder builder = new SAXBuilder();
         try
         {
-            Document doc = builder.build( ("data/" + filename) );// parse XML tags
+            Document doc = builder.build( (directory+"/" + filename) );// parse XML tags
             //Document doc = builder.build( ("Weather_Records/" + filename) );// parse XML tags
             Element root = doc.getRootElement();
             // get root of XML tree

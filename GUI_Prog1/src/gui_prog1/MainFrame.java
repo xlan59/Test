@@ -1,25 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *    **** MainFrame.java ****
+ * 
+ * The major JFrame container which includes all menus, tool buttons
+ * graphics, computational data and dispaly image assigned in seperate panels.
+ * 
+ * Date: March 1, 2016
  */
 package gui_prog1;
 
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-/**
- *
- * @author 7173203
- */
+
 public class MainFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainFrame
-     */
+   // create new form Mainframe
     public MainFrame() {
         super("Weather Station");
-        initComponents();
-        chartContainer.init(record);
+        initComponents();               // create basic swing components 
+        chartContainer.init(record);    // call init() function from chartContainer to prase the data
     }
 
     /**
@@ -32,14 +31,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         ViewButtonGroup = new javax.swing.ButtonGroup();
-        ToolPanel = new javax.swing.JPanel();
-        YearButton = new javax.swing.JToggleButton();
-        MonthButton = new javax.swing.JToggleButton();
-        WeekButton = new javax.swing.JToggleButton();
-        DayButton = new javax.swing.JToggleButton();
-        PreviousButton = new javax.swing.JButton();
-        NextButton = new javax.swing.JButton();
-        chartContainer = new gui_prog1.ChartContainer();
         DisplayPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -52,6 +43,15 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        ToolPanel = new javax.swing.JPanel();
+        YearButton = new javax.swing.JToggleButton();
+        MonthButton = new javax.swing.JToggleButton();
+        WeekButton = new javax.swing.JToggleButton();
+        DayButton = new javax.swing.JToggleButton();
+        PreviousButton = new javax.swing.JButton();
+        NextButton = new javax.swing.JButton();
+        SelectButton = new javax.swing.JButton();
+        chartContainer = new gui_prog1.ChartContainer();
         ComputationPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -64,6 +64,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        imageDisplay2 = new gui_prog1.ImageDisplay();
         Menubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         OpenItem = new javax.swing.JMenuItem();
@@ -71,86 +72,6 @@ public class MainFrame extends javax.swing.JFrame {
         EditMenu = new javax.swing.JMenu();
         HelpItem = new javax.swing.JMenuItem();
         AboutItem = new javax.swing.JMenuItem();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        ToolPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        ViewButtonGroup.add(YearButton);
-        YearButton.setText("View Yearly");
-        YearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YearButtonActionPerformed(evt);
-            }
-        });
-
-        ViewButtonGroup.add(MonthButton);
-        MonthButton.setText("View Monthly");
-        MonthButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MonthButtonActionPerformed(evt);
-            }
-        });
-
-        ViewButtonGroup.add(WeekButton);
-        WeekButton.setText("View Weekly");
-        WeekButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WeekButtonActionPerformed(evt);
-            }
-        });
-
-        ViewButtonGroup.add(DayButton);
-        DayButton.setText("View Daily");
-        DayButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DayButtonActionPerformed(evt);
-            }
-        });
-
-        PreviousButton.setText("Previous Data Set");
-        PreviousButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PreviousButtonActionPerformed(evt);
-            }
-        });
-
-        NextButton.setText("Next data Set");
-        NextButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout ToolPanelLayout = new javax.swing.GroupLayout(ToolPanel);
-        ToolPanel.setLayout(ToolPanelLayout);
-        ToolPanelLayout.setHorizontalGroup(
-            ToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ToolPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(YearButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MonthButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WeekButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DayButton)
-                .addGap(208, 208, 208)
-                .addComponent(PreviousButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NextButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        ToolPanelLayout.setVerticalGroup(
-            ToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(YearButton)
-                .addComponent(MonthButton)
-                .addComponent(WeekButton)
-                .addComponent(DayButton)
-                .addComponent(PreviousButton)
-                .addComponent(NextButton))
-        );
 
         DisplayPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -202,7 +123,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(DisplayPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         DisplayPanelLayout.setVerticalGroup(
             DisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,6 +151,96 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel21)
                 .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        ToolPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        ViewButtonGroup.add(YearButton);
+        YearButton.setText("View Yearly");
+        YearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearButtonActionPerformed(evt);
+            }
+        });
+
+        ViewButtonGroup.add(MonthButton);
+        MonthButton.setText("View Monthly");
+        MonthButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MonthButtonActionPerformed(evt);
+            }
+        });
+
+        ViewButtonGroup.add(WeekButton);
+        WeekButton.setText("View Weekly");
+        WeekButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WeekButtonActionPerformed(evt);
+            }
+        });
+
+        ViewButtonGroup.add(DayButton);
+        DayButton.setText("View Daily");
+        DayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DayButtonActionPerformed(evt);
+            }
+        });
+
+        PreviousButton.setText("Previous Data Set");
+        PreviousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PreviousButtonActionPerformed(evt);
+            }
+        });
+
+        NextButton.setText("Next data Set");
+        NextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextButtonActionPerformed(evt);
+            }
+        });
+
+        SelectButton.setText("Date Select");
+        SelectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ToolPanelLayout = new javax.swing.GroupLayout(ToolPanel);
+        ToolPanel.setLayout(ToolPanelLayout);
+        ToolPanelLayout.setHorizontalGroup(
+            ToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ToolPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(YearButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MonthButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(WeekButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DayButton)
+                .addGap(63, 63, 63)
+                .addComponent(SelectButton)
+                .addGap(72, 72, 72)
+                .addComponent(PreviousButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NextButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ToolPanelLayout.setVerticalGroup(
+            ToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(YearButton)
+                .addComponent(MonthButton)
+                .addComponent(WeekButton)
+                .addComponent(DayButton)
+                .addComponent(PreviousButton)
+                .addComponent(NextButton)
+                .addComponent(SelectButton))
         );
 
         ComputationPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -364,10 +375,11 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(DisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ComputationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(ComputationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imageDisplay2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,106 +387,187 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(ToolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chartContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ComputationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imageDisplay2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //  Action listener for quit menu item
     private void QuitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitItemActionPerformed
        System.out.println("File|Quit selected");
        System.exit(0);
     }//GEN-LAST:event_QuitItemActionPerformed
 
+    // View Yearly button action to update graphics and data for the specific year
     private void YearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearButtonActionPerformed
         // TODO add your handling code here:
         chartContainer.viewYear();
+        int year_i = chartContainer.getYear_i();
         
-        jLabel1.setText("Average Temperature (F):   "+ record.getYearAvTemp(chartContainer.getYear_i()));
-        jLabel2.setText("Higest Temperature (F):   "+ record.getYearMinMaxTemp(chartContainer.getYear_i()).max);
-        jLabel3.setText("Date/Time :   "+ record.getYearMinMaxTemp(chartContainer.getYear_i()).maxDay);
-        jLabel4.setText("Lowest Temperature (F):   "+ record.getYearMinMaxTemp(chartContainer.getYear_i()).min);
-        jLabel5.setText("Date/Time :   "+ record.getYearMinMaxTemp(chartContainer.getYear_i()).minDay);
-        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getYearAvWind(chartContainer.getYear_i()));
-        jLabel7.setText("Maximum Wind Speed (mph):  "+ record.getYearMinMaxWind(chartContainer.getYear_i()).max);
-        jLabel8.setText("Date/Time :   "+ record.getYearMinMaxWind(chartContainer.getYear_i()).maxDay);
-        jLabel9.setText("Wind Direction:   ");
-        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getYearRainfall(chartContainer.getYear_i()));
+        jLabel1.setText("Average Temperature (F):   "+ record.getYearAvTemp(year_i));
+        jLabel2.setText("Higest Temperature (F):   "+ record.getYearMinMaxTemp(year_i).max);
+        jLabel3.setText("Date/Time :   "+ record.getYearMinMaxTemp(year_i).maxDay);
+        jLabel4.setText("Lowest Temperature (F):   "+ record.getYearMinMaxTemp(year_i).min);
+        jLabel5.setText("Date/Time :   "+ record.getYearMinMaxTemp(year_i).minDay);
+        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getYearAvWind(year_i));
+        jLabel7.setText("Maximum Wind Speed (mph):  "+ record.getYearMinMaxWind(year_i).max);
+        jLabel8.setText("Date/Time :   "+ record.getYearMinMaxWind(year_i).maxDay);
+        jLabel9.setText("Wind Direction:   "+ record.getYearPreWind(year_i));
+        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getYearRainfall(year_i));
     }//GEN-LAST:event_YearButtonActionPerformed
 
+    // About menu item to show the version the this application
     private void AboutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutItemActionPerformed
        System.out.println("Edit|About selected");
        JOptionPane.showMessageDialog( null, "WeatherStation, v.0.9.0", "About WeatherStation", JOptionPane.INFORMATION_MESSAGE );
     }//GEN-LAST:event_AboutItemActionPerformed
 
+    // Next data set button to move towards the data of next year/month/week/day
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
         chartContainer.nextDataset();
     }//GEN-LAST:event_NextButtonActionPerformed
 
+    // Previous data set button to move back to the data of previous year/month/week/day
     private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousButtonActionPerformed
         chartContainer.prevDataset();
     }//GEN-LAST:event_PreviousButtonActionPerformed
 
+    // View Monthly button action to update graphics and data of the specific month
     private void MonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthButtonActionPerformed
         // TODO add your handling code here:
         chartContainer.viewMonth();
         
-        
-        
-        jLabel1.setText("Average Temperature (F):   "+ record.getMonthAvTemp(chartContainer.getYear_i(), chartContainer.getMonth_i()));
-        jLabel2.setText("Higest Temperature (F):   "+ record.getMonthMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i()).max);
-        jLabel3.setText("Date/Time :   "+ record.getMonthMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i()).maxDay);
-        jLabel4.setText("Lowest Temperature (F):   "+ record.getMonthMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i()).min);
-        jLabel5.setText("Date/Time :   "+ record.getMonthMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i()).minDay);
-        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getMonthAvWind(chartContainer.getYear_i(), chartContainer.getMonth_i()));
-        jLabel7.setText("Maximum Wind Speed (mph):   "+ record.getMonthMinMaxWind(chartContainer.getYear_i(),chartContainer.getMonth_i()).max);
-        jLabel8.setText("Date/Time :   "+ record.getMonthMinMaxWind(chartContainer.getYear_i(),chartContainer.getMonth_i()).maxDay);
-        jLabel9.setText("Wind Direction:   ");
-        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getMonthRainfall(chartContainer.getYear_i(), chartContainer.getMonth_i()));
-               
+        int year_i = chartContainer.getYear_i();
+        int month_i = chartContainer.getMonth_i();
+       
+        jLabel1.setText("Average Temperature (F):   "+ record.getMonthAvTemp(year_i, month_i));
+        jLabel2.setText("Higest Temperature (F):   "+ record.getMonthMinMaxTemp(year_i, month_i).max);
+        jLabel3.setText("Date/Time :   "+ record.getMonthMinMaxTemp(year_i, month_i).maxDay);
+        jLabel4.setText("Lowest Temperature (F):   "+ record.getMonthMinMaxTemp(year_i, month_i).min);
+        jLabel5.setText("Date/Time :   "+ record.getMonthMinMaxTemp(year_i, month_i).minDay);
+        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getMonthAvWind(year_i, month_i));
+        jLabel7.setText("Maximum Wind Speed (mph):   "+ record.getMonthMinMaxWind(year_i, month_i).max);
+        jLabel8.setText("Date/Time :   "+ record.getMonthMinMaxWind(year_i, month_i).maxDay);
+        jLabel9.setText("Wind Direction:   " + record.getMonthPreWind(year_i, month_i));
+        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getMonthRainfall(year_i, month_i));              
     }//GEN-LAST:event_MonthButtonActionPerformed
 
+     // View Weekly button action to update graphics and data for the specific week
     private void WeekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WeekButtonActionPerformed
         // TODO add your handling code here:
         chartContainer.viewWeek();
+        
+        int year_i = chartContainer.getYear_i();
+        int month_i = chartContainer.getMonth_i();
+        int day_i = chartContainer.getDay_i();
+                      
+        jLabel1.setText("Average Temperature (F):   "+ record.getWeekAvTemp(year_i, month_i, day_i));
+        jLabel2.setText("Higest Temperature (F):   "+ record.getWeekMinMaxTemp(year_i, month_i, day_i).max);
+        jLabel3.setText("Date/Time :   "+ record.getWeekMinMaxTemp(year_i, month_i, day_i).maxDay);
+        jLabel4.setText("Lowest Temperature (F):   "+ record.getWeekMinMaxTemp(year_i, month_i, day_i).min);
+        jLabel5.setText("Date/Time :   "+ record.getWeekMinMaxTemp(year_i, month_i, day_i).minDay);
+        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getWeekAvWind(year_i, month_i, day_i));
+        jLabel7.setText("Maximum Wind Speed (mph):   "+ record.getWeekMinMaxWind(year_i, month_i, day_i).max);
+        jLabel8.setText("Date/Time :   "+ record.getWeekMinMaxWind(year_i, month_i, day_i).maxDay);
+        jLabel9.setText("Wind Direction:   "+ record.getWeekPreWind(year_i, month_i, day_i));
+        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getWeekRainfall(year_i, month_i, day_i));
+        
     }//GEN-LAST:event_WeekButtonActionPerformed
 
+     // View Daily button action to update graphics and data for the specific day
     private void DayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayButtonActionPerformed
         // TODO add your handling code here:
         chartContainer.viewDay();
         
-        jLabel1.setText("Average Temperature (F):   "+ record.getDayAvTemp(chartContainer.getYear_i(), chartContainer.getMonth_i(),chartContainer.getDay_i()));
-        jLabel2.setText("Higest Temperature (F):   "+ record.getDayMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i(),chartContainer.getDay_i()).max);
-        jLabel3.setText("Date/Time :   "+ record.getDayMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i(),chartContainer.getDay_i()).maxDay);
-        jLabel4.setText("Lowest Temperature (F):   "+ record.getDayMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i(),chartContainer.getDay_i()).min);
-        jLabel5.setText("Date/Time :   "+ record.getDayMinMaxTemp(chartContainer.getYear_i(),chartContainer.getMonth_i(),chartContainer.getDay_i()).minDay);
-        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getDayAvWind(chartContainer.getYear_i(), chartContainer.getMonth_i(),chartContainer.getDay_i()));
-        jLabel7.setText("Maximum Wind Speed (mph):   "+ record.getDayMinMaxWind(chartContainer.getYear_i(),chartContainer.getMonth_i(),chartContainer.getDay_i()).max);
-        jLabel8.setText("Date/Time :   "+ record.getDayMinMaxWind(chartContainer.getYear_i(),chartContainer.getMonth_i(),chartContainer.getDay_i()).maxDay);
-        jLabel9.setText("Wind Direction:   ");
-        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getDayRainfall(chartContainer.getYear_i(), chartContainer.getMonth_i(),chartContainer.getDay_i()));
+        int year_i = chartContainer.getYear_i();
+        int month_i = chartContainer.getMonth_i();
+        int day_i = chartContainer.getDay_i();
+                      
+        jLabel1.setText("Average Temperature (F):   "+ record.getDayAvTemp(year_i, month_i, day_i));
+        jLabel2.setText("Higest Temperature (F):   "+ record.getDayMinMaxTemp(year_i, month_i, day_i).max);
+        jLabel3.setText("Date/Time :   "+ record.getDayMinMaxTemp(year_i, month_i, day_i).maxDay);
+        jLabel4.setText("Lowest Temperature (F):   "+ record.getDayMinMaxTemp(year_i, month_i, day_i).min);
+        jLabel5.setText("Date/Time :   "+ record.getDayMinMaxTemp(year_i, month_i, day_i).minDay);
+        jLabel6.setText("Mean Wind Speed (mph):   "+ record.getDayAvWind(year_i, month_i, day_i));
+        jLabel7.setText("Maximum Wind Speed (mph):   "+ record.getDayMinMaxWind(year_i, month_i, day_i).max);
+        jLabel8.setText("Date/Time :   "+ record.getDayMinMaxWind(year_i, month_i, day_i).maxDay);
+        jLabel9.setText("Wind Direction:   "+ record.getDayPreWind(year_i, month_i, day_i));
+        jLabel10.setText("Conmunitive RainFall (in.):   "+ record.getDayRainfall(year_i, month_i, day_i));
     }//GEN-LAST:event_DayButtonActionPerformed
 
+    // Help menu item to display the usage of this application
     private void HelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpItemActionPerformed
         System.out.println("Edit|About selected");
-        JOptionPane.showMessageDialog( null, "Usage:", "Usage of Weather Station", JOptionPane.INFORMATION_MESSAGE );
+        JOptionPane.showMessageDialog( null, "Once you click the Previous/Next buttons, please reclick the view button to update the analyzed data.\n"
+                + "Left click on the graphic will return a dialog with current data.\n"
+                + "Date Select button will show you a window to prompt a valid date, click Ok would refresh the graphic.\n"
+                + "Open item under File menu allows you to choose the folder that stores records to reinitialize the application."
+                , "Usage of Weather Station", JOptionPane.INFORMATION_MESSAGE );
     }//GEN-LAST:event_HelpItemActionPerformed
 
+    // Open menu item which handles opening the absolute path of the directory tha stores record xml files
     private void OpenItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenItemActionPerformed
+        System.out.println("File|Open selected");
         JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new java.io.File("."));
+        fc.setDialogTitle("Select a Directory");
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        fc.setAcceptAllFileFilterUsed(false);
+        
         if( fc.showOpenDialog( null ) == JFileChooser.APPROVE_OPTION )
         {
-            System.out.println( "You picked this file: " + fc.getSelectedFile().getName() );
+             System.out.println("getCurrentDirectory(): " +  fc.getCurrentDirectory().getName());
+             System.out.println("getSelectedFile() : "  +  fc.getSelectedFile().getAbsolutePath());
+            
+            //System.out.println( "You picked this file: " + fc.getSelectedFile().getName() );
         }
+        
+        record = ReadXMLFile.readXMLFile(fc.getSelectedFile().getAbsolutePath());
+        chartContainer.init(record);
+              
     }//GEN-LAST:event_OpenItemActionPerformed
+
+    // Date select button that is used to refresh the graphics with choosen date
+    private void SelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectButtonActionPerformed
+        System.out.println("Select Menu selected");
+        
+        Integer[] yearArr = new Integer[record.size];
+        for( int i = 0; i < record.size; i++)
+        {
+            yearArr[i] = (int)record.leastYear+i;
+        }       
+        Integer[] monthArr  = {1,2,3,4,5,6,7,8,9,10,11,12};
+        Integer[] dayArr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+        JComboBox<Integer> yearList = new JComboBox<Integer>(yearArr);
+        JComboBox<Integer> monthList = new JComboBox<Integer>(monthArr);
+        JComboBox<Integer> dayList = new JComboBox<Integer>(dayArr); 
+        Object[] message = {
+            "Year: ", yearList,
+            "Month: ", monthList,
+            "Day: ", dayList 
+        };
+        
+        int option = JOptionPane.showConfirmDialog(null, message,"Date Selection", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            if (chartContainer.selectedDataset( (int) yearList.getSelectedItem(), (int) monthList.getSelectedItem(), (int) dayList.getSelectedItem())) {
+                chartContainer.viewDay();
+             }
+            else { JOptionPane.showMessageDialog(null, "Invalid Date", "Error", JOptionPane.OK_OPTION);
+            }          
+        }
+    }//GEN-LAST:event_SelectButtonActionPerformed
     
     /**
-     * @param args the command line arguments
+     * @param args no command line arguments
+     *  main function that initialize the MainFrame form
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -504,12 +597,15 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                record = ReadXMLFile.readXMLFile("data");
+                record = ReadXMLFile.readXMLFile("data2");
                 new MainFrame().setVisible(true);
             }
         });
     }
-
+    
+    public javax.swing.JComboBox<Integer> dayList;
+    public javax.swing.JComboBox<Integer> monthList;
+    public javax.swing.JComboBox<Integer> yearList;
     private static Records record;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AboutItem;
@@ -525,11 +621,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem OpenItem;
     private javax.swing.JButton PreviousButton;
     private javax.swing.JMenuItem QuitItem;
+    private javax.swing.JButton SelectButton;
     private javax.swing.JPanel ToolPanel;
     private javax.swing.ButtonGroup ViewButtonGroup;
     private javax.swing.JToggleButton WeekButton;
     private javax.swing.JToggleButton YearButton;
     private gui_prog1.ChartContainer chartContainer;
+    private gui_prog1.ImageDisplay imageDisplay2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
