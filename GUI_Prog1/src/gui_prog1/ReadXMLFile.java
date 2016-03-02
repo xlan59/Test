@@ -41,9 +41,10 @@ import javax.swing.JPanel;
 
 public class ReadXMLFile
 {
-    static public String[] directions = {" N "," NE "," NW "," NNE "," NNW "," S ",
-                            " SE ", " SW "," SSE ", " SSW "," E "," ENE "," ESE ",
-                            " W "," WNW "," WSW "} ;
+    static public String[] directions = {" N "," NE ", " NW ", " W ",
+        " NNE ", " NNW ", " S ", " SE ",
+        " SW ", " SSE ", " SSW ", " E ",
+        " ENE "," ESE "," WNW "," WSW "} ;
     
     public static Records readXMLFile( String directory )
     {
@@ -169,6 +170,19 @@ public class ReadXMLFile
             {
                 temp.year[i].avTemp /= 12;
                 temp.year[i].avWindSpeed /= 12;
+            }
+            
+            int largestWind = 0;
+            for(int j = 0; j<temp.size; j++)
+            {
+                for(int k =0; k<16;k++)
+                {
+                    if(temp.year[j].preWind.get(directions[k])> largestWind)
+                    {
+                        largestWind = temp.year[j].preWind.get(directions[k]);
+                        temp.year[j].bestWind = directions[k];
+                    }
+                }
             }
             
             System.out.println("Size: " + temp.size);
@@ -299,6 +313,7 @@ public class ReadXMLFile
         int month = 0;
         int day = 0;    
         int year = 0;
+        int largestWind = 0;
         String str;
         
         //int indexY = 0;
@@ -347,6 +362,16 @@ public class ReadXMLFile
                     temp.days[indexY].avWindSpeed /= indexX;
                     temp.avTemp += temp.days[indexY].avTemp;
                     temp.avWindSpeed += temp.days[indexY].avWindSpeed;
+                    
+                    largestWind = 0;
+                    for(int k =0; k<16;k++)
+                    {
+                        if(temp.days[indexY].preWind.get(directions[k])> largestWind)
+                        {
+                            largestWind = temp.days[k].preWind.get(directions[k]);
+                            temp.days[indexY].bestWind = directions[k];
+                        }
+                    }
                     
                     ref_index = temp.days[indexY].date[0].indexOf('/');
         
@@ -404,6 +429,24 @@ public class ReadXMLFile
             
             temp.avWindSpeed += temp.days[indexY].avWindSpeed;
             temp.avWindSpeed /= indexY;
+            
+            for(int k =0; k<16;k++)
+            {
+                if(temp.days[indexY].preWind.get(directions[k])> largestWind)
+                {
+                    largestWind = temp.days[k].preWind.get(directions[k]);
+                    temp.days[indexY].bestWind = directions[k];
+                }
+            }
+            
+            for(int k =0; k<16;k++)
+            {
+                if(temp.preWind.get(directions[k])> largestWind)
+                {
+                    largestWind = temp.preWind.get(directions[k]);
+                    temp.bestWind = directions[k];
+                }
+            }
             ref_index = temp.days[indexY].date[0].indexOf('/');
         
             month = Integer.parseInt( temp.days[indexY].date[0].substring( ref_index-2, ref_index ));
@@ -416,19 +459,10 @@ public class ReadXMLFile
             c.set(year, month, day);
             temp.days[indexY].dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
                 
-            //child = ( Element ) iterator.next();
-            //if ( !iterator.hasNext() )
-            //    System.out.print( " = " + child.getValue() );
-            //    System.out.println();
-            
-            
-            //listChildren( root, 0 );
-            // print info in XML tree
         }
         // JDOMException indicates a well-formedness error
         catch ( JDOMException e )
         {
-            //System.out.println( args[0] + " is not well-formed." );
             System.out.println(indexX);
             System.out.println( e.getMessage() );
             
@@ -450,7 +484,7 @@ public class ReadXMLFile
    *                P is P.M.
    * Returns a Minute set to the date and time values.
  ************************************************************************/
-    public static /*Minute*/ void convertToMinute( String date, String time, Day data, int indexX )
+    public static void convertToMinute( String date, String time, Day data, int indexX )
     {
         int year;
         int month;
@@ -458,10 +492,6 @@ public class ReadXMLFile
         int hours;
         int minutes;
         int ref_index = 0;
-        
-        /*System.out.println("No Space");
-        System.out.println(date);
-        System.out.println(time);*/
         
         ref_index = date.indexOf('/');
         
@@ -489,9 +519,6 @@ public class ReadXMLFile
         
         data.time[indexX] = new Minute( minutes, hours, day, month, year );
         
-        //return new Minute( minutes, hours, day, month, year );
-        
-//        /return min;
     }
     
 }

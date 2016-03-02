@@ -35,8 +35,9 @@ public class Day {
     public boolean validDay = false;
     public int dayOfWeek = 0;
     
+    
     public Map<String, Integer> preWind = new HashMap<String, Integer>();
-     
+    public String bestWind = new String(); 
    
     public Day()
     {

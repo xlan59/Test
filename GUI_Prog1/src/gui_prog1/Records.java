@@ -1,9 +1,10 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package gui_prog1;
+
 
 /**
  *
@@ -64,18 +65,6 @@ public class Records
         return rdays;
     }
     
-    public Day[] getWeek(int year, int month, int week)
-    {
-        int dayIndex = 0;
-        Day [] rdays = new Day [7];
-     
-        for(int k = (7*week); k < (7*week)+7; k++)
-        {
-                rdays[dayIndex] = this.year[this.yearIndex(year)].months[month].days[k];
-                dayIndex++;
-        }
-        return rdays;
-    }
     
     
     
@@ -83,111 +72,7 @@ public class Records
     {  
        return this.year[year].months[month].days[day].dayOfWeek;
     }
-    
-    public Day[] getWeekR(int year, int month, int day)
-    {
-        int dayIndex = 0;
-        int tmpYear = year;
-        int tmpMonth = month;
-        int dayGoal = day;
-        Day [] rdays = new Day [7];
-     
-       
-        rdays[this.year[year].months[month].days[dayGoal].dayOfWeek - 1] = 
-                rdays[dayIndex] = this.year[year].months[month].days[dayGoal];
         
-        dayIndex = this.year[year].months[month].days[dayGoal].dayOfWeek - 1;
-        for(int k = dayGoal - 1; dayIndex > 0; k--)
-        {
-            if(k <+ 0);
-            {
-                k = 30;
-                
-                if(tmpMonth<=0)
-                {
-                    if(tmpYear<=0)
-                        return null;
-                    else
-                        tmpYear -= 1;
-                
-                    tmpMonth = 11;
-                }
-                else
-                    tmpMonth -=1;
-            }
-            
-            if(this.year[year].months[month].days[dayGoal].validDay)
-            {
-                rdays[this.year[year].months[month].days[k].dayOfWeek - 1] = this.year[year].months[month].days[k];
-                dayIndex--;
-            }
-            
-        }
-        
-        tmpYear = year;
-        tmpMonth = month;
-        dayGoal = day;
-        
-        dayIndex = this.year[year].months[month].days[dayGoal].dayOfWeek + 1;
-        for(int k = dayGoal + 1; dayIndex < 8; k++)
-        {
-            if(k >= 30);
-            {
-                k = 0;
-                
-                if(tmpMonth>=11)
-                {
-                    if(tmpYear>=this.size)
-                        return null;
-                    else
-                        tmpYear += 1;
-                
-                    tmpMonth = 0;
-                }
-                else
-                    tmpMonth +=1;
-            }
-            
-            if(this.year[year].months[month].days[dayGoal].validDay)
-            {
-                rdays[this.year[year].months[month].days[k].dayOfWeek - 1] = this.year[year].months[month].days[k];
-                dayIndex++;
-            }
-            
-        }
-        
-        /*for(int k = (7*week); k < (7*week)+7; k++)
-        {
-                rdays[dayIndex] = this.year[this.yearIndex(year)].months[month].days[k];
-                dayIndex++;
-        }
-        
-         /*if(this.year[year].months[month].days[dayGoal].dayOfWeek != 1)
-        {
-            dayGoal -= this.year[year].months[month].days[dayGoal].dayOfWeek - 1;
-        }
-        
-        
-        
-        if(dayGoal < 0);
-        {
-            if(month<0)
-            {
-                if(year<0)
-                    return null;
-                else
-                    year -= 1;
-                
-                month = 11;
-            }
-            else
-                month -=1;
-        }*/
-        
-        return rdays;
-    }
-    
-    
     public Day getDay(int year, int month, int day)
     {
         return this.year[year].months[month].days[day];
@@ -201,6 +86,50 @@ public class Records
     public double getMonthAvTemp(int year, int month)
     {
         return this.year[year].months[month].avTemp;
+    }
+    
+    public double getWeekAvTemp(int year_i, int month_i, int day_i)
+    {
+        double avTemp = 0;
+        
+        avTemp += year[year_i].months[month_i].days[day_i].avTemp;
+        for( int i = 0; i < 6; i++ )
+        {
+            // try to get the next day
+            day_i++;
+            // if day is past current month
+            if( day_i == 31 || 
+                    !year[year_i].months[month_i].days[day_i].validDay)
+            {
+                // if last month of year
+                if(month_i == 11)
+                {
+                    // go to next year
+                    // if end of record, return
+                    if(year_i == size-1)
+                    {
+                        System.out.println("Record End");
+                        // return false
+                        return avTemp;
+                    }
+                    // else view next year
+                    year_i++;
+                    // reset lower indexes
+                    month_i = 0;
+                    day_i = 0;
+                }
+                // else go to next month
+                else
+                {
+                    month_i++;
+                    // reset lower indexes
+                    day_i = 0;
+                }
+            }
+            
+            avTemp += year[year_i].months[month_i].days[day_i].avTemp;
+        }
+        return avTemp;
     }
     
     public double getDayAvTemp(int year, int month, int day)
@@ -218,6 +147,50 @@ public class Records
         return this.year[year].months[month].avWindSpeed;
     }
     
+    public double getWeekAvWind(int year_i, int month_i, int day_i)
+    {
+        double avWind = 0;
+        
+        avWind += year[year_i].months[month_i].days[day_i].avWindSpeed;
+        for( int i = 0; i < 6; i++ )
+        {
+            // try to get the next day
+            day_i++;
+            // if day is past current month
+            if( day_i == 31 || 
+                    !year[year_i].months[month_i].days[day_i].validDay)
+            {
+                // if last month of year
+                if(month_i == 11)
+                {
+                    // go to next year
+                    // if end of record, return
+                    if(year_i == size-1)
+                    {
+                        System.out.println("Record End");
+                        // return false
+                        return avWind/(i+1);
+                    }
+                    // else view next year
+                    year_i++;
+                    // reset lower indexes
+                    month_i = 0;
+                    day_i = 0;
+                }
+                // else go to next month
+                else
+                {
+                    month_i++;
+                    // reset lower indexes
+                    day_i = 0;
+                }
+            }
+            
+            avWind += year[year_i].months[month_i].days[day_i].avWindSpeed;
+        }
+        return avWind/7;
+    }
+    
     public double getDayAvWind(int year, int month, int day)
     {
         return this.year[year].months[month].days[day].avWindSpeed;
@@ -231,6 +204,56 @@ public class Records
     public MinMax getMonthMinMaxTemp(int year, int month)
     {
         return this.year[year].months[month].mtemp;
+    }
+    
+    public MinMax getWeekMinMaxTemp(int year_i, int month_i, int day_i)
+    {
+        MinMax mTemp = new MinMax();
+        
+        mTemp.setMinMax(year[year_i].months[month_i].days[day_i].mtemp.max,
+                year[year_i].months[month_i].days[day_i].mtemp.maxDay);
+        mTemp.setMinMax(year[year_i].months[month_i].days[day_i].mtemp.min,
+                year[year_i].months[month_i].days[day_i].mtemp.minDay);
+        for( int i = 0; i < 6; i++ )
+        {
+            // try to get the next day
+            day_i++;
+            // if day is past current month
+            if( day_i == 31 || 
+                    !year[year_i].months[month_i].days[day_i].validDay)
+            {
+                // if last month of year
+                if(month_i == 11)
+                {
+                    // go to next year
+                    // if end of record, return
+                    if(year_i == size-1)
+                    {
+                        System.out.println("Record End");
+                        // return false
+                        return mTemp;
+                    }
+                    // else view next year
+                    year_i++;
+                    // reset lower indexes
+                    month_i = 0;
+                    day_i = 0;
+                }
+                // else go to next month
+                else
+                {
+                    month_i++;
+                    // reset lower indexes
+                    day_i = 0;
+                }
+            }
+            
+            mTemp.setMinMax(year[year_i].months[month_i].days[day_i].mtemp.max,
+                year[year_i].months[month_i].days[day_i].mtemp.maxDay);
+            mTemp.setMinMax(year[year_i].months[month_i].days[day_i].mtemp.min,
+                year[year_i].months[month_i].days[day_i].mtemp.minDay);    
+        }
+        return mTemp;
     }
     
     public MinMax getDayMinMaxTemp(int year, int month, int day)
@@ -248,6 +271,56 @@ public class Records
         return this.year[year].months[month].mwindSpeed;
     }
     
+    public MinMax getWeekMinMaxWind(int year_i, int month_i, int day_i)
+    {
+        MinMax mWind = new MinMax();
+        
+        mWind.setMinMax(year[year_i].months[month_i].days[day_i].mwindSpeed.max,
+                year[year_i].months[month_i].days[day_i].mwindSpeed.maxDay);
+        mWind.setMinMax(year[year_i].months[month_i].days[day_i].mwindSpeed.min,
+                year[year_i].months[month_i].days[day_i].mwindSpeed.minDay);
+        for( int i = 0; i < 6; i++ )
+        {
+            // try to get the next day
+            day_i++;
+            // if day is past current month
+            if( day_i == 31 || 
+                    !year[year_i].months[month_i].days[day_i].validDay)
+            {
+                // if last month of year
+                if(month_i == 11)
+                {
+                    // go to next year
+                    // if end of record, return
+                    if(year_i == size-1)
+                    {
+                        System.out.println("Record End");
+                        // return false
+                        return mWind;
+                    }
+                    // else view next year
+                    year_i++;
+                    // reset lower indexes
+                    month_i = 0;
+                    day_i = 0;
+                }
+                // else go to next month
+                else
+                {
+                    month_i++;
+                    // reset lower indexes
+                    day_i = 0;
+                }
+            }
+            
+            mWind.setMinMax(year[year_i].months[month_i].days[day_i].mwindSpeed.max,
+                year[year_i].months[month_i].days[day_i].mwindSpeed.maxDay);
+            mWind.setMinMax(year[year_i].months[month_i].days[day_i].mwindSpeed.min,
+                year[year_i].months[month_i].days[day_i].mwindSpeed.minDay);    
+        }
+        return mWind;
+    }
+    
     public MinMax getDayMinMaxWind(int year, int month, int day)
     {
         return this.year[year].months[month].days[day].mwindSpeed;
@@ -263,9 +336,112 @@ public class Records
         return this.year[year].months[month].totalRain;
     }
     
+    public double getWeekRainfall(int year_i, int month_i, int day_i)
+    {
+        double Rainfall = 0;
+        
+        Rainfall += year[year_i].months[month_i].days[day_i].totalRain;
+        for( int i = 0; i < 6; i++ )
+        {
+            // try to get the next day
+            day_i++;
+            // if day is past current month
+            if( day_i == 31 || 
+                    !year[year_i].months[month_i].days[day_i].validDay)
+            {
+                // if last month of year
+                if(month_i == 11)
+                {
+                    // go to next year
+                    // if end of record, return
+                    if(year_i == size-1)
+                    {
+                        System.out.println("Record End");
+                        // return false
+                        return Rainfall;
+                    }
+                    // else view next year
+                    year_i++;
+                    // reset lower indexes
+                    month_i = 0;
+                    day_i = 0;
+                }
+                // else go to next month
+                else
+                {
+                    month_i++;
+                    // reset lower indexes
+                    day_i = 0;
+                }
+            }
+            
+            Rainfall += year[year_i].months[month_i].days[day_i].totalRain;
+        }
+        return Rainfall;
+    }
+    
     public double getDayRainfall(int year, int month, int day)
     {
         return this.year[year].months[month].days[day].totalRain;
     }
     
+    public String getYearPreWind(int year)
+    {
+        return this.year[year].bestWind;
+    }
+    
+    public String getMonthPreWind(int year, int month)
+    {
+        return this.year[year].months[month].bestWind;
+    }
+    
+    public String getWeekPreWind(int year_i, int month_i, int day_i)
+    {
+        String preWind = " N ";
+        
+        preWind += year[year_i].months[month_i].days[day_i].bestWind;
+        for( int i = 0; i < 6; i++ )
+        {
+            // try to get the next day
+            day_i++;
+            // if day is past current month
+            if( day_i == 31 || 
+                    !year[year_i].months[month_i].days[day_i].validDay)
+            {
+                // if last month of year
+                if(month_i == 11)
+                {
+                    // go to next year
+                    // if end of record, return
+                    if(year_i == size-1)
+                    {
+                        System.out.println("Record End");
+                        // return false
+                        return preWind;
+                    }
+                    // else view next year
+                    year_i++;
+                    // reset lower indexes
+                    month_i = 0;
+                    day_i = 0;
+                }
+                // else go to next month
+                else
+                {
+                    month_i++;
+                    // reset lower indexes
+                    day_i = 0;
+                }
+            }
+            
+            preWind = year[year_i].months[month_i].days[day_i].bestWind;
+        }
+        return preWind;
+    }
+    
+    public String getDayPreWind(int year, int month, int day)
+    {
+        return this.year[year].months[month].days[day].bestWind;
+    }
+      
 }

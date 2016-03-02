@@ -22,6 +22,7 @@ public class Month {
     public double avWindSpeed = 0;
     public double totalRain = 0;
     public Map<String, Integer> preWind = new HashMap<String, Integer>();
+    public String bestWind = new String();
     
     public Month()
     {
@@ -39,6 +40,7 @@ public class Month {
         preWind.put(" SSW ", 0);
         
         preWind.put(" E ", 0);
+        preWind.put(" W ", 0);
         preWind.put(" ENE ", 0);
         preWind.put(" ESE ", 0);
         preWind.put(" WNW ", 0);
